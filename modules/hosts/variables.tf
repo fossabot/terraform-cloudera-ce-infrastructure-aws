@@ -105,3 +105,30 @@ variable "volumes" {
 
   description = "Additional storage volumes to attach to the hosts. Each volume is defined by a device name, mount point, size, type, and optional tags."
 }
+
+variable "pricing_license_model" {
+  type        = string
+  description = "License model for pricing calculation. Common values: 'Bring your own license', 'No License required'. Set to null to skip this filter."
+  default     = null
+}
+
+variable "instance_get_password_data" {
+  description = "Return the password data for the instance"
+  type        = bool
+
+  default = null
+}
+
+variable "instance_user_data" {
+  type        = string
+  description = "Base64-encoded user data for the instance."
+
+  default = null
+}
+
+variable "instance_replace_on_user_data_change" {
+  type        = bool
+  description = "Trigger a destroy and recreate the EC2 instance when user_data changes."
+
+  default = null
+}

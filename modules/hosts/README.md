@@ -57,8 +57,12 @@ No modules.
 | <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | List of security group IDs to attach to the instances | `list(string)` | n/a | yes |
 | <a name="input_ssh_key_pair"></a> [ssh\_key\_pair](#input\_ssh\_key\_pair) | SSH key pair name | `string` | n/a | yes |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | List of subnet IDs to provision the instances | `list(string)` | n/a | yes |
+| <a name="input_instance_get_password_data"></a> [instance\_get\_password\_data](#input\_instance\_get\_password\_data) | Return the password data for the instance | `bool` | `null` | no |
+| <a name="input_instance_replace_on_user_data_change"></a> [instance\_replace\_on\_user\_data\_change](#input\_instance\_replace\_on\_user\_data\_change) | Trigger a destroy and recreate the EC2 instance when user\_data changes. | `bool` | `null` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Instance type name for the hosts | `string` | `"t2.micro"` | no |
+| <a name="input_instance_user_data"></a> [instance\_user\_data](#input\_instance\_user\_data) | Base64-encoded user data for the instance. | `string` | `null` | no |
 | <a name="input_offset"></a> [offset](#input\_offset) | Number offset for instance name | `number` | `0` | no |
+| <a name="input_pricing_license_model"></a> [pricing\_license\_model](#input\_pricing\_license\_model) | License model for pricing calculation. Common values: 'Bring your own license', 'No License required'. Set to null to skip this filter. | `string` | `null` | no |
 | <a name="input_public_ip"></a> [public\_ip](#input\_public\_ip) | Flag to assign public IP addresses to the hosts | `bool` | `false` | no |
 | <a name="input_quantity"></a> [quantity](#input\_quantity) | Number of instances. Defaults to a single instance without numbering (bare name). | `number` | `0` | no |
 | <a name="input_root_volume"></a> [root\_volume](#input\_root\_volume) | Root volume details | <pre>object({<br/>    delete_on_termination = optional(bool, true)<br/>    volume_size           = optional(number, 100)<br/>    volume_type           = optional(string)<br/>  })</pre> | `{}` | no |

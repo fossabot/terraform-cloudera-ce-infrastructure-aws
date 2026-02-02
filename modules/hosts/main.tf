@@ -34,7 +34,7 @@ locals {
     "Red Hat BYOL Linux"       = "RHEL",
     "Ubuntu"                   = "Linux"
     "Linux/UNIX"               = "Linux"
-    # "Windows"                  = "Windows"
+    "Windows"                  = "Windows"
   }
   # pricing_arch_map = {
   #   "x86_64" = "64-bit"
@@ -74,6 +74,10 @@ resource "aws_instance" "pvc_base" {
   tags = merge(var.tags, {
     Name = var.quantity == 0 ? var.name : format("%s-%02d", var.name, count.index + var.offset + 1)
   })
+
+  get_password_data           = var.instance_get_password_data
+  user_data                   = var.instance_user_data
+  user_data_replace_on_change = var.instance_replace_on_user_data_change
 }
 
 data "aws_pricing_product" "pvc_base" {
@@ -96,6 +100,14 @@ data "aws_pricing_product" "pvc_base" {
   filters {
     field = "operatingSystem"
     value = local.pricing_os_map[data.aws_ami.pvc_base.platform_details]
+  }
+
+  dynamic "filters" {
+    for_each = var.pricing_license_model != null ? [1] : []
+    content {
+      field = "licenseModel"
+      value = var.pricing_license_model
+    }
   }
 
   # filters {
